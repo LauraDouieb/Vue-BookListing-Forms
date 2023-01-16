@@ -32,7 +32,11 @@
     },
     methods: {
       appendBook(bookData) {
-        this.books.push({bookData.bookTitle, bookData.bookAuthor, bookData.finishedReading});
+        this.books.push({
+          title: bookData.bookTitle,
+          author: bookData.bookAuthor,
+          finishedReading: bookData.finishedReading
+        });
       }
     }
   };
