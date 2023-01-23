@@ -1,21 +1,19 @@
 <template>
   <div>
     <h1>{{title}}</h1>
-    <ul>
-        <book-item v-for='book in books' :key='book.id' :book='book'></book-item>
+    <ul class="exists">
+      <book-item v-for='book in books' :key='book.id' :book='book'></book-item>
+    </ul>
+    <hr>
+    <h2>Filtered Books by Ownership</h2>
+    <select v-model="holding">
+      <option v-for="filter in filters">{{ filter }}</option>
+    </select>
+    <ul class="exists">
+      <book-item v-for='book in filteredBooks' :key='book.id' :book='book'></book-item>
     </ul>
     <br><hr>
     <book-form @addBook='appendBook'></book-form>
-    <hr>
-    <h2>
-      Filtered Books By Ownership
-    </h2>
-    <select v-model="holding">
-      <ul>
-        <book-item v-for='book in filteredBooks' :key='book.id' :book='book'></book-item>
-      </ul>
-      <option v-for='filter in filters'>{{ filter }}</option>
-    </select>
   </div>
 </template>
 
@@ -48,7 +46,9 @@
             finishedReading: true,
             ownership: "borrowed"
           }
-        ]
+        ],
+        filters: ["bought", "borrowed"],
+        holding: "bought"
       };
     },
     computed: {
@@ -69,9 +69,7 @@
           ownership: bookData.ownership
         });
       }
-    },
-    filters: ["bought", "borrowed"],
-    holding: "bought"
+    }
   };
 </script>
 
